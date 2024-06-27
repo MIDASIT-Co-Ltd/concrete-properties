@@ -808,7 +808,7 @@ class PrestressedSection(ConcreteSection):
                 strain += eps_pe
 
             # calculate stress, force and point of action
-            sig = lumped_geom.material.stress_strain_profile.get_stress(strain=strain)
+            sig = lumped_geom.material.stress_strain_profile.get_stress_bounds(strain=strain)
             n_lumped = sig * area
 
             if isinstance(lumped_geom.material, SteelStrand):
@@ -951,7 +951,7 @@ class PrestressedSection(ConcreteSection):
                 strain += eps_pe
 
             # calculate stress, force and point of action
-            sig = lumped_geom.material.stress_strain_profile.get_stress(strain=strain)
+            sig = lumped_geom.material.stress_strain_profile.get_stress_bounds(strain=strain)
             n_lumped = sig * lumped_geom.calculate_area()
 
             if isinstance(lumped_geom.material, SteelStrand):

@@ -89,6 +89,30 @@ class StressStrainProfile:
 
         return stress_function(strain)
 
+    def get_stress_bounds(self, strain: float) -> float:
+        """Returns a stress given a strain.
+
+        Args:
+            strain: Strain at which to return a stress.
+
+        Returns:
+            Stress
+        """
+        stress_function = interp1d(
+            x=self.strains,
+            y=self.stresses,
+            kind="linear",
+            fill_value="extrapolate" 
+        )
+
+        if strain < self.strains[0]:
+            if self.stresses[0] >= 0:
+                warnings.warn("Warning: The first stress value is not negative.")
+            return self.stresses[0]
+        elif strain > self.strains[-1]:
+            return self.stresses[-1]
+        return stress_function(strain)
+
     def get_elastic_modulus(self) -> float:
         """Returns the elastic modulus of the stress-strain profile.
 

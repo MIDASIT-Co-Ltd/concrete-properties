@@ -867,7 +867,7 @@ class ConcreteSection:
             failure_convergence = max(strain / ult_tens_strain, failure_convergence)
 
             # calculate stress and force
-            stress = lumped_geom.material.stress_strain_profile.get_stress(
+            stress = lumped_geom.material.stress_strain_profile.get_stress_bounds(
                 strain=strain
             )
             force = stress * area
@@ -1088,7 +1088,7 @@ class ConcreteSection:
                     strain += eps_pe
 
             # calculate stress and force
-            stress = lumped_geom.material.stress_strain_profile.get_stress(
+            stress = lumped_geom.material.stress_strain_profile.get_stress_bounds(
                 strain=strain
             )
             force = stress * area
@@ -1864,7 +1864,7 @@ class ConcreteSection:
             )
 
             # calculate stress, force and point of action
-            sig = lumped_geom.material.stress_strain_profile.get_stress(strain=strain)
+            sig = lumped_geom.material.stress_strain_profile.get_stress_bounds(strain=strain)
             n_lumped = sig * lumped_geom.calculate_area()
 
             lumped_reinf_sigs.append(sig)
@@ -1989,7 +1989,7 @@ class ConcreteSection:
                 )
 
             # calculate stress, force and point of action
-            sig = lumped_geom.material.stress_strain_profile.get_stress(strain=strain)
+            sig = lumped_geom.material.stress_strain_profile.get_stress_bounds(strain=strain)
             n_lumped = sig * lumped_geom.calculate_area()
 
             lumped_reinf_sigs.append(sig)
